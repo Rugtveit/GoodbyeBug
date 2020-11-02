@@ -20,36 +20,29 @@ extern "C" void setup(ModInfo &info)
     modInfo = info;
 }  
 
-// Making the hook
-// public static bool SetActiveScene(Scene scene)
-// It's a static method, so there's no instance
-// it expects a bool return 
-// and has 1 variable which is Scene
-// If the type isn't in typedef or you aren't using codegen then use Il2CppObject*
-MAKE_HOOK_OFFSETLESS(SceneManager_SetActiveScene, bool, Scene scene)
+MAKE_HOOK_OFFSETLESS(PracticeViewController_Init, void, Il2CppObject* self, Il2CppObject* level, Il2CppObject* beatmapCharacteristics, Il2CppObject* beatmapDifficulty)
 {
-    // Getting C# String from scene handle
-    // private static extern string GetNameInternal(int sceneHandle);
-    Il2CppString* sceneCsString = RET_V_UNLESS(il2cpp_utils::RunMethod("UnityEngine.SceneManagement", "Scene", "GetNameInternal", scene.m_Handle));
+    // Running first game code first
+    PracticeViewController_Init(self, level, beatmapCharacteristics, beatmapDifficulty);
+    
+    // Fixing practice speed lsider bug
+    // Changing speed slider to be 31 number of steps
+    GoodbyeBugs::FixSlider(self);
+}
 
-    // Converting from C# string to string
-    // Converting from to_utf16 to utf8 string
-    std::string sceneCppString = to_utf8(csstrtostr(sceneCsString));
-
-    // Priting out current active scene
-    getLogger().debug("Current active scene: %s", sceneCppString.data());
-
-    // Running the original method
-    return SceneManager_SetActiveScene(scene);
+MAKE_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, void, Il2CppObject* self, Vector2 deltaPos)
+{
+    // If the ViewScroller is Veritcal then run Original code
+    // FixScrolling runs the modified version of Horizontal TableView code. 
+    if(!GoodbyeBugs::FixScrolling(self, deltaPos)) HandleJoystickWasNotCeneteredThisFrame(self, deltaPos);
 }
 
 
 
 extern "C" void load()
 {
-    // Installing the hook
-    // We first give it the name of our hook we made
-    // Then we need to provide it with methodinfo* to find out where to hook
-    // We run FindMethodUnsafe and provide it, namespace, klass, method and parameter count.
-    INSTALL_HOOK_OFFSETLESS(SceneManager_SetActiveScene, il2cpp_utils::FindMethodUnsafe("UnityEngine.SceneManagement", "SceneManager", "SetSceneActive", 1));
+    auto* practiceViewControllerMethod = il2cpp_utils::FindMethodUnsafe("", "PracticeViewController", "Init", 3);
+    auto* tableViewScrollerMethod = il2cpp_utils::FindMethodUnsafe("HMUI", "TableViewScroller", "HandleJoystickWasNotCenteredThisFrame", 1);
+    INSTALL_HOOK_OFFSETLESS(PracticeViewController_Init, practiceViewControllerMethod);
+    INSTALL_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, tableViewScrollerMethod);
 }

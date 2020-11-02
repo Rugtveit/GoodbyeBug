@@ -1,11 +1,11 @@
 {
-  "id": "ID",
-  "name": "MODNAME",
-  "version": "0.1.0",
-  "author": "AUTHOR",
+  "id": "goodbyebug",
+  "name": "GoodbyeBug",
+  "version": "0.1.1",
+  "author": "Rugtveit",
   "description": [
-    "LINE1",
-    "LINE2"
+    "Fixes bugs: Playlist scrolling not working correct",
+    "Practice slider being incorrect and causing users not to get to 100%"
   ],
   "category": "Gameplay",
   "gameVersion": "1.12.2",
@@ -14,16 +14,16 @@
     {
       "type": "HookMod",
       "installAction": {
-        "installLibraryFile": "libmodname.so"
+        "installLibraryFile": "libgoodbyebug.so"
       },
       "uninstallAction": {
-        "removeLibraryFile": "libmodname.so"
+        "removeLibraryFile": "libgoodbyebug.so"
       }
     },
     {
       "type": "HookModLibrary",
       "installAction": {
-        "installLibraryFile": "liblibraryname.so"
+        "installLibraryFile": "libbeatsaber-hook_0_8_2.so"
       }
     }
   ]

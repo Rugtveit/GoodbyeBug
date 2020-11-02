@@ -4,5 +4,10 @@
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp" 
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "beatsaber-hook/shared/config/config-utils.hpp"
-#include "modloader/shared/modloader.hpp"
-#include "goodbyebugs.hpp"
+
+class GoodbyeBugs 
+{
+    public: 
+        static void FixSlider(Il2CppObject* self);
+        static bool FixScrolling(Il2CppObject* self, Vector2 deltaPos);
+};
