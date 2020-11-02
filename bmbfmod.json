@@ -1,0 +1,30 @@
+{
+  "id": "ID",
+  "name": "MODNAME",
+  "version": "0.1.0",
+  "author": "AUTHOR",
+  "description": [
+    "LINE1",
+    "LINE2"
+  ],
+  "category": "Gameplay",
+  "gameVersion": "1.12.2",
+  "platform": "Quest",
+  "components": [
+    {
+      "type": "HookMod",
+      "installAction": {
+        "installLibraryFile": "libmodname.so"
+      },
+      "uninstallAction": {
+        "removeLibraryFile": "libmodname.so"
+      }
+    },
+    {
+      "type": "HookModLibrary",
+      "installAction": {
+        "installLibraryFile": "liblibraryname.so"
+      }
+    }
+  ]
+}
