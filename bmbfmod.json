@@ -8,7 +8,7 @@
     "Practice slider being incorrect and causing users not to get to 100%"
   ],
   "category": "Gameplay",
-  "gameVersion": "1.12.2",
+  "gameVersion": "1.13.0",
   "platform": "Quest",
   "components": [
     {

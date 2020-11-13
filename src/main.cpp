@@ -20,15 +20,6 @@ extern "C" void setup(ModInfo &info)
     modInfo = info;
 }  
 
-MAKE_HOOK_OFFSETLESS(PracticeViewController_Init, void, Il2CppObject* self, Il2CppObject* level, Il2CppObject* beatmapCharacteristics, Il2CppObject* beatmapDifficulty)
-{
-    // Running first game code first
-    PracticeViewController_Init(self, level, beatmapCharacteristics, beatmapDifficulty);
-    
-    // Fixing practice speed lsider bug
-    // Changing speed slider to be 31 number of steps
-    GoodbyeBugs::FixSlider(self);
-}
 
 MAKE_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, void, Il2CppObject* self, Vector2 deltaPos)
 {
@@ -41,8 +32,6 @@ MAKE_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, void, Il2CppObject*
 
 extern "C" void load()
 {
-    auto* practiceViewControllerMethod = il2cpp_utils::FindMethodUnsafe("", "PracticeViewController", "Init", 3);
     auto* tableViewScrollerMethod = il2cpp_utils::FindMethodUnsafe("HMUI", "TableViewScroller", "HandleJoystickWasNotCenteredThisFrame", 1);
-    INSTALL_HOOK_OFFSETLESS(PracticeViewController_Init, practiceViewControllerMethod);
     INSTALL_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, tableViewScrollerMethod);
 }

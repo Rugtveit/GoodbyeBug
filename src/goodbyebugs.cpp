@@ -6,13 +6,6 @@ void setScrollDirection(Il2CppObject* self, int direction)
 }
 
 
-void GoodbyeBugs::FixSlider(Il2CppObject* self)
-{
-    Il2CppObject* speedSlider;  
-    speedSlider =   RET_V_UNLESS(il2cpp_utils::GetFieldValue(self, "_speedSlider"));
-                    RET_V_UNLESS(il2cpp_utils::SetPropertyValue(speedSlider, "numberOfSteps", 31));
-}
-
 bool GoodbyeBugs::FixScrolling(Il2CppObject* self, Vector2 deltaPos)
 {
     RET_0_UNLESS(il2cpp_utils::SetPropertyValue(self, "enabled", false));
