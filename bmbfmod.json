@@ -1,11 +1,11 @@
 {
   "id": "goodbyebug",
   "name": "GoodbyeBug",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "author": "Rugtveit",
   "description": [
-    "Fixes bugs: Playlist scrolling not working correct",
-    "Practice slider being incorrect and causing users not to get to 100%"
+    "Fixes playlist scrolling in the wrong direction",
+    "when you got more than 7 playlists"
   ],
   "category": "Gameplay",
   "gameVersion": "1.13.0",
