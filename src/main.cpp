@@ -2,14 +2,10 @@
 
 static ModInfo modInfo;
 
-static Configuration& getConfig() {
-    static Configuration config(modInfo);
-    return config;
-}
-
-const Logger& getLogger() {
-  static const Logger& logger(modInfo);
-  return logger;
+Logger& getLogger()
+{
+    static Logger* logger = new Logger(modInfo);
+    return *logger;
 }
 
 
@@ -25,7 +21,7 @@ MAKE_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, void, Il2CppObject*
 {
     // If the ViewScroller is Veritcal then run Original code
     // FixScrolling runs the modified version of Horizontal TableView code. 
-    if(!GoodbyeBugs::FixScrolling(self, deltaPos)) HandleJoystickWasNotCeneteredThisFrame(self, deltaPos);
+    if(!GoodbyeBugs::FixScrolling(self, deltaPos, getLogger())) HandleJoystickWasNotCeneteredThisFrame(self, deltaPos);
 }
 
 
@@ -33,5 +29,5 @@ MAKE_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, void, Il2CppObject*
 extern "C" void load()
 {
     auto* tableViewScrollerMethod = il2cpp_utils::FindMethodUnsafe("HMUI", "TableViewScroller", "HandleJoystickWasNotCenteredThisFrame", 1);
-    INSTALL_HOOK_OFFSETLESS(HandleJoystickWasNotCeneteredThisFrame, tableViewScrollerMethod);
+    INSTALL_HOOK_OFFSETLESS(getLogger(), HandleJoystickWasNotCeneteredThisFrame, tableViewScrollerMethod);
 }

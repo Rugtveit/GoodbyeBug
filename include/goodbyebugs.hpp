@@ -8,5 +8,5 @@
 class GoodbyeBugs 
 {
     public: 
-        static bool FixScrolling(Il2CppObject* self, Vector2 deltaPos);
+        static bool FixScrolling(Il2CppObject* self, Vector2 deltaPos, Logger& log);
 };
