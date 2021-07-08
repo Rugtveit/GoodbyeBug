@@ -55,7 +55,7 @@ extern/
 
 
 
-/.vs/GoodbyeBug/v16
+/.vs/GoodbyeBug/*
 *.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/ProjectSettings.json
