@@ -4,5 +4,6 @@
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp" 
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "beatsaber-hook/shared/config/config-utils.hpp"
+#include "beatsaber-hook/shared/utils/hooking.hpp"
 #include "modloader/shared/modloader.hpp"
-#include "goodbyebugs.hpp"
+//#include "goodbyebugs.hpp"
